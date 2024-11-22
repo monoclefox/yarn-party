@@ -10,14 +10,25 @@ body {
   height: 100vh;
 }
 
-.nav {
+.header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   .nav-item {
     border-radius: 5px;
     font-weight: bold;
@@ -41,6 +52,7 @@ body {
 }
 
 .card {
+  font-size: 1.5rem;
   &.selected {
     display: flex;
     justify-content: center;
