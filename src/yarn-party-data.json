@@ -2,7 +2,7 @@
   "title": "ZigZags (Fully Reversible)",
   "items": [
     {
-      "id": 1,
+      "id": 0,
       "text": "Row 1 (RS): *K1, p2, k3, p2; repeat from * to end."
     },
     {

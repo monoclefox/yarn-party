@@ -72,6 +72,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
+  
 }
 
 .counter-title {
@@ -84,11 +85,13 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
 }
 
 .counter-items {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   width: 100%;
 }
 
@@ -101,7 +104,8 @@ body {
 
 .counter-item {
   border: 1px solid white;
-  padding: 20px;
+  padding: 14px;
+  margin: 0 4px;
   &.selected {
     background-color: white;
     color: black;
