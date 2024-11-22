@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import YarnCard from './yarnCard'
 import Nav from './Nav'
+import Counter from './Counter'
 import data from "./yarn-party-data.json";
 import './App.css'
 
@@ -25,6 +26,9 @@ function App() {
             clickHandler={handleCardClick}
           />
         ))}
+      <div className='counter-container'>
+        <Counter data={data.items} />
+      </div>
       </div>
     </>
   )
