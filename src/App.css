@@ -1,13 +1,26 @@
-/* @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-} */
+/* Define CSS Variables */
+:root {
+  --background-color: #f9f9f9;
+  --text-color: #333;
+  --secondary-text-color: #666;
+  --border-color: #cccccc;
+  --hover-border-color: #666;
+  --highlight-color: #0078d4;
+  --highlight-hover-color: #0056a3;
+  --reset-button-color: #ff4b4b;
+  --reset-button-hover-color: #cc3a3a;
+  --card-background-color: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
 
+/* General Reset */
 body {
   margin: 0;
   padding: 0;
   height: 100vh;
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .header {
@@ -17,50 +30,77 @@ body {
   top: 0;
   left: 0;
   right: 0;
+  padding: 16px;
+  background-color: var(--card-background-color);
+  box-shadow: 0 2px 4px var(--shadow-color);
 }
 
 .title {
   text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
 }
 
 .nav {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  .nav-item {
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    border: 1px solid white;
-    padding: 10px;
-    font-size: 0.5rem;
-    &.selected {
-      background-color: white;
-      color: black;
-    }
-  }
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.nav-item {
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  margin: 0 4px;
+  transition: all 0.3s ease;
+  background-color: var(--card-background-color);
+  color: var(--secondary-text-color);
+}
+
+.nav-item:hover {
+  border-color: var(--hover-border-color);
+  background-color: var(--background-color);
+}
+
+.nav-item.selected {
+  background-color: var(--highlight-color);
+  color: var(--card-background-color);
+  border: 1px solid var(--highlight-hover-color);
 }
 
 .container {
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  padding: 16px;
 }
 
 .card {
   font-size: 1.5rem;
-  &.selected {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  padding: 24px;
+  border-radius: 8px;
+  background-color: var(--card-background-color);
+  box-shadow: 0 2px 8px var(--shadow-color);
   display: none;
-  width: 100%;
-  height: 100%;
+  transition: all 0.2s;
+  transition-behavior: allow-discrete;
+  opacity: 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
+.card.selected {
+  display: block;
+  opacity: 1;
 }
 
 .counter-container {
@@ -68,48 +108,65 @@ body {
   justify-content: center;
   align-items: center;
   position: absolute;
-  width: 100%;
-  bottom: 0;
+  bottom: 16px;
   left: 0;
   right: 0;
-  
-}
-
-.counter-title {
-  font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: 8px;
+  padding: 16px;
+  background-color: var(--card-background-color);
+  box-shadow: 0 -2px 4px var(--shadow-color);
 }
 
 .counter-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--secondary-text-color);
+  margin-bottom: 8px;
 }
 
 .counter-items {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.reset-button {
-  border: 1px solid white;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 8px;
+  gap: 8px;
 }
 
 .counter-item {
-  border: 1px solid white;
-  padding: 14px;
-  margin: 0 4px;
-  &.selected {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-  }
+  border: 2px solid var(--border-color);
+  background-color: var(--card-background-color);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
+.counter-item:hover {
+  border-color: var(--highlight-color);
+}
+
+.counter-item.selected {
+  background-color: var(--highlight-color);
+  color: var(--card-background-color);
+  border-color: var(--highlight-hover-color);
+}
+
+.reset-button {
+  border: none;
+  background-color: var(--reset-button-color);
+  color: var(--card-background-color);
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reset-button:hover {
+  background-color: var(--reset-button-hover-color);
+}
