@@ -74,10 +74,29 @@ body {
   right: 0;
 }
 
+.counter-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.counter-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .counter-items {
   display: flex;
   flex-direction: row;
   width: 100%;
+}
+
+.reset-button {
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 8px;
 }
 
 .counter-item {
