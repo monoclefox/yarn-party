@@ -207,3 +207,20 @@ body {
 .reset-button:hover {
   background-color: var(--reset-button-hover-color);
 }
+
+.row-done {
+  position: absolute;
+  top: 50%;
+  left: 82%;
+  font-size: .75rem;
+  width: 100px;
+  font-weight: 600;
+  color: var(--highlight-color);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.row-done.show {
+  opacity: 1;
+  transform: translate(0%, -50%);
+}
