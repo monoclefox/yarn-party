@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import CounterItem from './CounterItem';
 
 
-// Replace PropTypes with TypeScript types
 function Counter({ data }: { data: any[] }) {
   const [activeIndexes, setActiveIndexes] = useState<(number | string)[]>([]);
 
