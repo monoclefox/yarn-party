@@ -26,11 +26,11 @@ function Counter({ data }: { data: any[] }) {
   }
 
   return <div className="counter">
-    <div className="counter-header">
-      {/* <div className="counter-title">Row Count</div> */}
-      <button className="reset-button" onClick={() => reset()}>Reset</button>
-    </div>
+    {/* <div className="counter-header">
+      <div className="counter-title">Row Count</div>
+    </div> */}
     <div className="counter-items">
+    <button className="reset-button" onClick={() => reset()}>Reset</button>
       {data.map((item) => (
         <CounterItem
           id={item.id}

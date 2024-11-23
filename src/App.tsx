@@ -55,9 +55,9 @@ function App() {
             clickHandler={handleCardClick}
           />
         ))}
-      <div className='counter-container'>
+      {/* <div className='counter-container'>
         <Counter data={typedData.items} />
-      </div>
+      </div> */}
       </div>
     </>
   )

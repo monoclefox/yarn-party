@@ -91,9 +91,9 @@ body {
   font-weight: 600;
   cursor: pointer;
   border: 1px solid var(--border-color);
-  padding: 8px 12px;
+  padding: 8px 10px;
   font-size: 0.9rem;
-  margin: 0 4px;
+  margin: 0 2px;
   transition: all 0.3s ease;
   background-color: var(--card-background-color);
   color: var(--secondary-text-color);
@@ -163,15 +163,15 @@ body {
 .counter-items {
   display: flex;
   flex-direction: row;
-  gap: 8px;
+  gap: 4px;
 }
 
 .counter-item {
   border: 2px solid var(--border-color);
   background-color: var(--card-background-color);
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
