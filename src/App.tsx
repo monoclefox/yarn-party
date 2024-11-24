@@ -22,6 +22,7 @@ const typedData = data as YarnData;
 function App() {
   const [card, setCard] = useState<number>(0)
   const [rowDone, setRowDone] = useState(false);
+  const [doReset, setDoReset] = useState(false);
   // Load saved state from localStorage on component mount
   useEffect(() => {
     const savedState = localStorage.getItem('cardState');
@@ -36,11 +37,13 @@ function App() {
     const next = index > typedData.items.length - 1 ? 0 : index;
     if (index === typedData.items.length && next === 0) {
       setRowDone(true);
+      setDoReset(true);
       setTimeout(() => {
         setRowDone(false);
       }, 3000);
     } else {
       setRowDone(false);
+      setDoReset(false);
     }
     setCard(next);
     localStorage.setItem('cardState', JSON.stringify(next));
@@ -62,7 +65,7 @@ function App() {
           />
         ))}
       <div className='counter-container'>
-        <Counter data={typedData.items} />
+        <Counter data={typedData.items} advanceCallback={handleCardClick} doReset={doReset} />
       </div>
       <div className={`row-done ${rowDone ? 'show' : ''}`}>🎉 Row Done! 🎉</div>
       </div>

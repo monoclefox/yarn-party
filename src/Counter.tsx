@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
 import CounterItem from './CounterItem';
 
+interface CounterProps {
+  data: any[];
+  advanceCallback: (id: number) => void;
+  doReset: boolean;
+}
 
-function Counter({ data }: { data: any[] }) {
+function Counter({ data, advanceCallback, doReset }: CounterProps) {
   const [activeIndexes, setActiveIndexes] = useState<(number | string)[]>([]);
 
   useEffect(() => {
@@ -14,13 +19,25 @@ function Counter({ data }: { data: any[] }) {
     }
   }, [])
 
+
   const reset = () => {
     setActiveIndexes([]);
     localStorage.setItem('indexState', JSON.stringify([]));
   }
+  useEffect(() => {
+    console.log('doReset', doReset)
+    if (doReset) {
+      console.log('wft', doReset)
+      reset();
+    }
+  }, [doReset])
+
 
   const indexCallback = (id: number, toggle: boolean): void => {
     const indexes = toggle ? [...activeIndexes, id] : activeIndexes.filter((index) => index !== id);
+    if (toggle) {
+      advanceCallback(id + 1);
+    }
     setActiveIndexes(indexes);
     localStorage.setItem('indexState', JSON.stringify(indexes));
   }
