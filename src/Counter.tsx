@@ -22,12 +22,15 @@ function Counter({ data, advanceCallback, doReset, next }: CounterProps) {
     }
   }, [])
 
-
-  const reset = () => {
-    setActiveIndexes([]);
-    localStorage.setItem('indexState', JSON.stringify([]));
-    advanceCallback(0);
-  }
+  useEffect(() => {
+    const newIndexes: number[] = [];
+    data.forEach((item) => {
+      if (item.id < next && !activeIndexes.includes(item.id)) {
+        newIndexes.push(item.id);
+      }
+    })
+    setActiveIndexes([...activeIndexes, ...newIndexes] as number[]);
+  }, [next])
   
   useEffect(() => {
     if (doReset) {
@@ -35,7 +38,17 @@ function Counter({ data, advanceCallback, doReset, next }: CounterProps) {
     }
   }, [doReset])
 
+  const setLocalStorageIndexes = (indexes: number[]) => {
+    localStorage.setItem('indexState', JSON.stringify(indexes));
+  }
 
+
+  const reset = () => {
+    setActiveIndexes([]);
+    setLocalStorageIndexes([]);
+    advanceCallback(0);
+  }
+  
   const indexCallback = (id: number, toggle: boolean): void => {
     if (activeIndexes.includes(id) && (id !== activeIndexes.length - 1) || id !== next) {
       return;
@@ -44,8 +57,8 @@ function Counter({ data, advanceCallback, doReset, next }: CounterProps) {
     if (toggle) {
       advanceCallback(id + 1);
     }
-    setActiveIndexes(indexes);
-    localStorage.setItem('indexState', JSON.stringify(indexes));
+    setActiveIndexes(indexes as number[]);
+    setLocalStorageIndexes(indexes as number[]);
   }
 
   return <div className="counter">
