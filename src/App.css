@@ -123,11 +123,12 @@ body {
 .nav-dropdown-header-arrow {
   transition: all 0.3s ease;
   transform-origin: 72% 40%;
+  transform: rotate(180deg);
   margin-top: 6px;
 }
 
 .nav-dropdown-header-arrow.open {
-  transform: rotate(180deg);
+  transform: rotate(0deg);
   
 }
 

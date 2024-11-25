@@ -37,8 +37,7 @@ function Counter({ data, advanceCallback, doReset, next }: CounterProps) {
 
 
   const indexCallback = (id: number, toggle: boolean): void => {
-    if (activeIndexes.includes(id) && (id !== activeIndexes.length - 1)) {
-      console.log('wtf')
+    if (activeIndexes.includes(id) && (id !== activeIndexes.length - 1) || id !== next) {
       return;
     }
     const indexes = toggle ? [...activeIndexes, id] : activeIndexes.filter((index) => index !== id);
