@@ -1,6 +1,7 @@
 interface CounterItemProps {
   id: number;
   toggle?: boolean;
+  next?: boolean;
   toggleCallback: (id: number, toggle: boolean) => void;
 }
 

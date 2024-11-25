@@ -9,6 +9,7 @@ interface CounterProps {
 
 function Counter({ data, advanceCallback, doReset }: CounterProps) {
   const [activeIndexes, setActiveIndexes] = useState<(number | string)[]>([]);
+  const [next, setNext] = useState<number>(0);
 
   useEffect(() => {
     const savedState = localStorage.getItem('indexState');
@@ -22,18 +23,22 @@ function Counter({ data, advanceCallback, doReset }: CounterProps) {
 
   const reset = () => {
     setActiveIndexes([]);
+    setNext(0);
     localStorage.setItem('indexState', JSON.stringify([]));
   }
+  
   useEffect(() => {
-    console.log('doReset', doReset)
     if (doReset) {
-      console.log('wft', doReset)
       reset();
     }
   }, [doReset])
 
 
   const indexCallback = (id: number, toggle: boolean): void => {
+    if (activeIndexes.includes(id) && (id !== activeIndexes.length - 1)) {
+      console.log('wtf')
+      return;
+    }
     const indexes = toggle ? [...activeIndexes, id] : activeIndexes.filter((index) => index !== id);
     if (toggle) {
       advanceCallback(id + 1);
@@ -53,7 +58,9 @@ function Counter({ data, advanceCallback, doReset }: CounterProps) {
           id={item.id}
           key={item.id}
           toggle={activeIndexes.includes(item.id)}
-          toggleCallback={indexCallback}/>
+          toggleCallback={indexCallback}
+          next={false}
+        />
       ))}
     </div>
   </div>
