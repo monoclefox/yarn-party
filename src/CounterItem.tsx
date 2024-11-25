@@ -1,14 +1,14 @@
 interface CounterItemProps {
   id: number;
   toggle?: boolean;
-  next?: boolean;
   toggleCallback: (id: number, toggle: boolean) => void;
+  next?: number;
 }
 
-function CounterItem({ id, toggle, toggleCallback }: CounterItemProps) {
+function CounterItem({ id, toggle, toggleCallback, next }: CounterItemProps) {
   return (
     <div
-      className={`counter-item ${toggle ? "selected" : ""}`}
+      className={`counter-item ${toggle ? "selected" : ""} ${next === id ? "next" : ""}`}
       onClick={() => toggleCallback(id, !toggle)}
     >
       {id + 1}

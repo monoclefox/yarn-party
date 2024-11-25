@@ -21,15 +21,16 @@ const typedData = data as YarnData;
 
 function App() {
   const [card, setCard] = useState<number>(0)
-  const [rowDone, setRowDone] = useState(false);
-  const [doReset, setDoReset] = useState(false);
+  const [rowDone, setRowDone] = useState<boolean>(false);
+  const [doReset, setDoReset] = useState<boolean>(false);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
   // Load saved state from localStorage on component mount
   useEffect(() => {
     const savedState = localStorage.getItem('cardState');
-    console.log('savedState', savedState)
     if (savedState !== null) { 
       const parsedState = JSON.parse(savedState);
       setCard(parsedState);
+      setCurrentIndex(parsedState);
     }
   }, []); 
   
@@ -46,14 +47,16 @@ function App() {
       setDoReset(false);
     }
     setCard(next);
+    setCurrentIndex(next);
     localStorage.setItem('cardState', JSON.stringify(next));
   }
+
 
   return (
     <>
       <div className="container">
         <div className="header">
-        <h1 className="title">{typedData.title}</h1>
+        <div className="title" dangerouslySetInnerHTML={ { __html: typedData.title } } />
         <Nav data={typedData.items} card={card} clickHandler={handleCardClick} />
         </div>
         {typedData.items.map((item) => (
@@ -65,7 +68,12 @@ function App() {
           />
         ))}
       <div className='counter-container'>
-        <Counter data={typedData.items} advanceCallback={handleCardClick} doReset={doReset} />
+        <Counter
+          data={typedData.items}
+          advanceCallback={handleCardClick}
+          doReset={doReset}
+          next={currentIndex > typedData.items.length - 1 ? 0 : currentIndex}
+        />
       </div>
       <div className={`row-done ${rowDone ? 'show' : ''}`}>🎉 Row Done! 🎉</div>
       </div>

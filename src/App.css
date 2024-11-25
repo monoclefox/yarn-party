@@ -1,18 +1,41 @@
 /* Define CSS Variables */
 :root {
-  --background-color: #f9f9f9;
-  --text-color: #333;
+  --background-color: #211F1F;
+  --text-color: #EEE9D2;
+  --button-background-color: #313131;
   --secondary-text-color: #666;
   --border-color: #cccccc;
   --hover-border-color: #666;
-  --highlight-color: #0078d4;
-  --highlight-hover-color: #0056a3;
-  --reset-button-color: #ff4b4b;
-  --reset-button-hover-color: #cc3a3a;
-  --card-background-color: #ffffff;
+  --highlight-color: #776937;
+  --highlight-color-2: #F2F290;
   --nav-scroller-color: #cccccc;
   --shadow-color: rgba(0, 0, 0, 0.1);
 }
+
+.atkinson-hyperlegible-regular {
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.atkinson-hyperlegible-bold {
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.atkinson-hyperlegible-regular-italic {
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.atkinson-hyperlegible-bold-italic {
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
 
 /* General Reset */
 body {
@@ -20,7 +43,7 @@ body {
   padding: 0;
   height: 100vh;
   overflow: hidden;
-  font-family: 'Arial', sans-serif;
+  font-family: "Atkinson Hyperlegible", sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -33,15 +56,12 @@ body {
   left: 0;
   right: 0;
   padding: 16px;
-  background-color: var(--card-background-color);
-  box-shadow: 0 2px 4px var(--shadow-color);
 }
 
 .title {
   text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--text-color);
+  font-size: 24px;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -60,29 +80,6 @@ body {
   &.right {
     right: calc(100vw - 20px)
   } */
-}
-
-.nav-scroller {
-  z-index: 100;
-  position: absolute;
-  top: 70px;
-  font-size: 1.5rem;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid var(--border-color);
-  padding: 20px 12px;
-  font-size: 0.9rem;
-  margin: 0 4px;
-  transition: all 0.3s ease;
-  background-color: var(--nav-scroller-color);
-  color: var(--secondary-text-color);
-  &.left {
-    left: 0;
-  }
-  &.right {
-    right: 0;
-  }
 }
 
 .nav-item {
@@ -118,20 +115,19 @@ body {
 }
 
 .card {
-  font-size: 1.5rem;
+  font-size: 36px;
+  font-weight: 700;
   padding: 24px;
-  border-radius: 8px;
-  background-color: var(--card-background-color);
-  box-shadow: 0 2px 8px var(--shadow-color);
   display: none;
   transition: all 0.2s;
   transition-behavior: allow-discrete;
   opacity: 0;
   position: fixed;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%,0);
+  width: 50vw;
   user-select: none;
+  -webkit-user-select: none;
 }
 
 .card.selected {
@@ -166,11 +162,11 @@ body {
 }
 
 .counter-item {
-  border: 2px solid var(--border-color);
-  background-color: var(--card-background-color);
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  background-color: var(--button-background-color);
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border: 2px solid transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -179,32 +175,32 @@ body {
   color: var(--text-color);
   transition: all 0.3s ease;
   cursor: pointer;
+
+  &.selected {
+    background-color: var(--highlight-color);
+    color: var(--highlight-color-2);
+  }
+
+  &.next {
+    background: #00000033;
+    border: 2px solid var(--highlight-color-2);
+    width: 147px;
+  }
+
 }
 
-.counter-item:hover {
-  border-color: var(--highlight-color);
-}
-
-.counter-item.selected {
-  background-color: var(--highlight-color);
-  color: var(--card-background-color);
-  border-color: var(--highlight-hover-color);
-}
 
 .reset-button {
-  border: none;
-  background-color: var(--reset-button-color);
-  color: var(--card-background-color);
-  font-size: 0.9rem;
-  font-weight: bold;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.reset-button:hover {
-  background-color: var(--reset-button-hover-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  gap: 0px;
+  border-radius: 24px;
+  background: #313131;
+  opacity: 0px;
+  rotate: -90deg;
 }
 
 .row-done {
