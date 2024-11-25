@@ -123,8 +123,7 @@ body {
   transition-behavior: allow-discrete;
   opacity: 0;
   position: fixed;
-  left: 50%;
-  transform: translate(-50%,0);
+  top: 38%;
   width: 50vw;
   user-select: none;
   -webkit-user-select: none;
@@ -158,7 +157,7 @@ body {
 .counter-items {
   display: flex;
   flex-direction: row;
-  gap: 4px;
+  gap: 8px;
 }
 
 .counter-item {
@@ -196,7 +195,7 @@ body {
   align-items: center;
   width: 48px;
   height: 48px;
-  gap: 0px;
+  margin-right: 8px;
   border-radius: 24px;
   background: #313131;
   opacity: 0px;
