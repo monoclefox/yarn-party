@@ -1,5 +1,6 @@
 import { useState } from "react";
-
+import check from "./assets/checkmark.svg";
+import chevron from "./assets/chevron-up.svg";
 // Define interface for the data items
 interface NavItem {
     id: number;
@@ -13,39 +14,44 @@ interface NavProps {
     clickHandler: (id: number) => void;
 }
 
-interface NavScrollerProps {
-    direction: string;
-    onClick?: () => void;
-}
-
-const NavScroller = ({ direction, onClick }: NavScrollerProps) => {
-    return <div className={`nav-scroller ${direction}`} onClick={onClick}>
-        {direction === 'left' ? '<' : '>'}
-    </div>
-}
-
 function Nav({ data, card, clickHandler }: NavProps) {
-    const [navPosition, setNavPosition] = useState('left');
+    const [isOpen, setIsOpen] = useState(false);
 
-    const handleNavScrollerClick = (direction: string) => {
-        setNavPosition(direction);
-    }
-
-    return <>
-        {/* <NavScroller direction="left" onClick={() => handleNavScrollerClick('left')} />
-        <NavScroller direction="right" onClick={() => handleNavScrollerClick('right')}/> */}
-        <div className={navPosition + " nav"}>
-        {data.map((item) => (
-            <div
-                key={item.id}
-                className={(card === item.id ? "selected" : "") + " nav-item"} 
-                onClick={() => clickHandler(item.id)}
+    return (
+        <div className="nav">
+        <div className="nav-dropdown">
+            <div 
+                className="nav-dropdown-header"
+                onClick={() => setIsOpen(!isOpen)}
             >
-                {item.id + 1}
+                <div className="nav-dropdown-header-text">
+                    Row {card + 1}
+                    <span className={isOpen ? "nav-dropdown-header-arrow open" : "nav-dropdown-header-arrow"}>
+                        <img src={chevron} alt="chevron" />
+                    </span>
+                </div>
             </div>
-        ))}
+            
+            {isOpen && (
+                <div className="nav-dropdown-menu">
+                    {data.map((item) => (
+                        <div
+                            key={item.id}
+                            className={(card === item.id ? "selected" : "") + " nav-dropdown-item"}
+                            onClick={() => {
+                                clickHandler(item.id);
+                                setIsOpen(false);
+                            }}
+                        >
+                            Row {item.id + 1}
+                            {card === item.id && <img src={check} alt="check" />}
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
-    </>
+        </div>
+    );
 }
 
-export default Nav;
+export default Nav; 

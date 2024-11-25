@@ -51,13 +51,17 @@ function App() {
     localStorage.setItem('cardState', JSON.stringify(next));
   }
 
+  const handleNavClick = (index: number): void => {
+    setCard(index);
+    localStorage.setItem('cardState', JSON.stringify(index));
+  }
 
   return (
     <>
       <div className="container">
         <div className="header">
         <div className="title" dangerouslySetInnerHTML={ { __html: typedData.title } } />
-        <Nav data={typedData.items} card={card} clickHandler={handleCardClick} />
+        <Nav data={typedData.items} card={card} clickHandler={handleNavClick} />
         </div>
         {typedData.items.map((item) => (
           <YarnCard
