@@ -46,11 +46,8 @@ const ResetButton = styled.div`
 function Counter({ data, advanceCallback, doReset, next }: CounterProps) {
   const [activeIndexes, setActiveIndexes] = useState<(number | string)[]>([]);
 
-  console.log('next', next)
-
   useEffect(() => {
     const savedState = localStorage.getItem('indexState');
-    console.log('savedState', savedState)
     if (savedState !== null) { 
       const parsedState = JSON.parse(savedState);
       setActiveIndexes(parsedState);
@@ -68,6 +65,7 @@ function Counter({ data, advanceCallback, doReset, next }: CounterProps) {
   }, [next])
   
   useEffect(() => {
+    console.log('do reset', doReset);
     if (doReset) {
       reset();
     }

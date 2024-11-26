@@ -27,20 +27,17 @@ const Title = styled.div`
   margin: 0;
 `;
 
-const RowDone = styled.div`
+const RowDone = styled.div<{ rowDone: boolean }>`
   position: absolute;
-  top: 50%;
-  left: 82%;
-  font-size: .75rem;
-  width: 100px;
+  top: 20%;
+  left: calc(50% - 100px);
+  font-size: 1.5rem;
+  width: 200px;
   font-weight: 600;
   color: var(--highlight-color);
-  opacity: 0;
-  transition: all 0.3s ease;
-  &.show {
-    opacity: 1;
-    transform: translate(0%, -50%);
-  }
+  opacity: ${({ rowDone }) => (rowDone ? 1 : 0)};
+  transform: ${({ rowDone }) => (rowDone ? 'translate(0%, -50%)' : 'translate(0%, 0%)')};
+  transition: opacity 0.3s ease, transform 0.3s ease;
 `;
 
 // Add interface for yarn item
@@ -60,30 +57,32 @@ const typedData = data as YarnData;
 function Pattern() {
   const [card, setCard] = useState<number>(0)
   const [rowDone, setRowDone] = useState<boolean>(false);
-  const [doReset, setDoReset] = useState<boolean>(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  // Load saved state from localStorage on component mount
+
   useEffect(() => {
     const savedState = localStorage.getItem('cardState');
-    if (savedState !== null) { 
+    if (savedState !== null) {
       const parsedState = JSON.parse(savedState);
       setCard(parsedState);
       setCurrentIndex(parsedState);
     }
-  }, []); 
-  
+  }, []);
+
+  useEffect(() => {
+    if (rowDone) {
+      const timer = setTimeout(() => {
+        setRowDone(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [rowDone]);
+
   const handleCardClick = (index: number): void => {
     const next = index > typedData.items.length - 1 ? 0 : index;
     if (index === typedData.items.length && next === 0) {
+      console.log('Setting rowDone to true');
       setRowDone(true);
-      setDoReset(true);
-      setTimeout(() => {
-        setRowDone(false);
-      }, 3000);
-    } else {
-      setRowDone(false);
-      setDoReset(false);
-    }
+    } 
     setCard(next);
     setCurrentIndex(next);
     localStorage.setItem('cardState', JSON.stringify(next));
@@ -112,11 +111,11 @@ function Pattern() {
         <Counter
           data={typedData.items}
           advanceCallback={handleCardClick}
-          doReset={doReset}
+          doReset={rowDone}
           next={currentIndex > typedData.items.length - 1 ? 0 : currentIndex}
         />
       </div>
-      <RowDone className={rowDone ? 'show' : ''}>🎉 Row Done! 🎉</RowDone>
+      <RowDone rowDone={rowDone}>🎉 Row Done! 🎉</RowDone>
     </Container>
   )
 }
