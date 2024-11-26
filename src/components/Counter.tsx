@@ -1,5 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import styled from '@emotion/styled';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../store';
+import { setActiveIndexes, reset } from '../slices/counterSlice';
 import CounterItem from './CounterItem';
 import resetIcon from '../assets/reset-arrow.svg';
 
@@ -44,59 +47,46 @@ const ResetButton = styled.div`
 `;
 
 function Counter({ data, advanceCallback, doReset, next }: CounterProps) {
-  const [activeIndexes, setActiveIndexes] = useState<(number | string)[]>([]);
-
-  useEffect(() => {
-    const savedState = localStorage.getItem('indexState');
-    if (savedState !== null) { 
-      const parsedState = JSON.parse(savedState);
-      setActiveIndexes(parsedState);
-    }
-  }, [])
+  const dispatch = useDispatch();
+  const activeIndexes = useSelector((state: RootState) => state.counter.activeIndexes);
 
   useEffect(() => {
     const newIndexes: number[] = [];
+    if (activeIndexes.length === 0) {
+      return;
+    }
     data.forEach((item) => {
       if (item.id < next && !activeIndexes.includes(item.id)) {
         newIndexes.push(item.id);
       }
-    })
-    setActiveIndexes([...activeIndexes, ...newIndexes] as number[]);
-  }, [next])
-  
-  useEffect(() => {
-    console.log('do reset', doReset);
-    if (doReset) {
-      reset();
+    });
+    if (newIndexes.length > 0) {
+      dispatch(setActiveIndexes([...activeIndexes, ...newIndexes]));
     }
-  }, [doReset])
+  }, [next, data, activeIndexes, dispatch]);
 
-  const setLocalStorageIndexes = (indexes: number[]) => {
-    localStorage.setItem('indexState', JSON.stringify(indexes));
-  }
+  useEffect(() => {
+    if (doReset) {
+      dispatch(reset());
+      advanceCallback(0);
+    }
+  }, [doReset, dispatch, advanceCallback]);
 
-
-  const reset = () => {
-    setActiveIndexes([]);
-    setLocalStorageIndexes([]);
-    advanceCallback(0);
-  }
-  
   const indexCallback = (id: number, toggle: boolean): void => {
     if (activeIndexes.includes(id) && (id !== activeIndexes.length - 1) || id !== next) {
       return;
     }
     const indexes = toggle ? [...activeIndexes, id] : activeIndexes.filter((index) => index !== id);
+    console.log('indexes', indexes);
     if (toggle) {
       advanceCallback(id + 1);
     }
-    setActiveIndexes(indexes as number[]);
-    setLocalStorageIndexes(indexes as number[]);
+    dispatch(setActiveIndexes(indexes));
   }
 
   return <CounterContainer>
     <CounterItems>
-      <ResetButton onClick={() => reset()}>
+      <ResetButton onClick={() => dispatch(reset())}>
         <img src={resetIcon} alt="reset" />
       </ResetButton>
       {data.map((item) => (

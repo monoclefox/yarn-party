@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { setCard, setRowDone, setCurrentIndex } from '../slices/pattern';
+import { RootState } from '../store';
 import styled from '@emotion/styled'
 import data from '../yarn-party-data.json'
 import YarnCard from '../YarnCard'
 import Nav from '../components/PatternNav'
 import Counter from '../components/Counter'
-
-// Styled components
-const Container = styled.div`
-  /* styles from .container */
-`;
 
 const Header = styled.div`
   display: flex;
@@ -55,46 +53,48 @@ interface YarnData {
 const typedData = data as YarnData;
 
 function Pattern() {
-  const [card, setCard] = useState<number>(0)
-  const [rowDone, setRowDone] = useState<boolean>(false);
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const dispatch = useDispatch();
+  const card = useSelector((state: RootState) => state.pattern.card);
+  const rowDone = useSelector((state: RootState) => state.pattern.rowDone);
+  const currentIndex = useSelector((state: RootState) => state.pattern.currentIndex);
 
+  // Load the saved state from localStora
   useEffect(() => {
     const savedState = localStorage.getItem('cardState');
     if (savedState !== null) {
       const parsedState = JSON.parse(savedState);
-      setCard(parsedState);
-      setCurrentIndex(parsedState);
+      dispatch(setCard(parsedState));
+      dispatch(setCurrentIndex(parsedState));
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (rowDone) {
       const timer = setTimeout(() => {
-        setRowDone(false);
+        dispatch(setRowDone(false));
       }, 3000);
       return () => clearTimeout(timer);
     }
-  }, [rowDone]);
+  }, [rowDone, dispatch]);
 
   const handleCardClick = (index: number): void => {
     const next = index > typedData.items.length - 1 ? 0 : index;
     if (index === typedData.items.length && next === 0) {
       console.log('Setting rowDone to true');
-      setRowDone(true);
-    } 
-    setCard(next);
-    setCurrentIndex(next);
+      dispatch(setRowDone(true));
+    }
+    dispatch(setCard(next));
+    dispatch(setCurrentIndex(next));
     localStorage.setItem('cardState', JSON.stringify(next));
   }
 
   const handleNavClick = (index: number): void => {
-    setCard(index);
+    dispatch(setCard(index));
     localStorage.setItem('cardState', JSON.stringify(index));
   }
 
   return (
-    <Container>
+    <>
       <Header>
         <Title dangerouslySetInnerHTML={ { __html: typedData.title } } />
         <Nav data={typedData.items} card={card} clickHandler={handleNavClick} />
@@ -116,7 +116,7 @@ function Pattern() {
         />
       </div>
       <RowDone rowDone={rowDone}>🎉 Row Done! 🎉</RowDone>
-    </Container>
+    </>
   )
 }
 
