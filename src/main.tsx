@@ -36,6 +36,11 @@ const globalCSS = css`
     background-color: var(--background-color);
     color: var(--text-color);
   }
+
+  a {
+    color: var(--text-color);
+    text-decoration: none;
+  }
 `
 
 // Create a new router instance
