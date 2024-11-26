@@ -1,13 +1,58 @@
+/** @jsxImportSource @emotion/react */
+
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.js'
+import ReactDOM from 'react-dom/client'
+import { RouterProvider, createRouter } from '@tanstack/react-router'
+import { Global, css } from '@emotion/react'
 
-const root = document.getElementById('root')
-if (!root) throw new Error('Root element not found')
+// Import the generated route tree
+import { routeTree } from './routeTree.gen'
 
-createRoot(root).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+// Global styles, vars, and reset
+const globalCSS = css`
+  :root {
+  --background-color: #211F1F;
+  --text-color: #EEE9D2;
+  --button-background-color: #313131;
+  --secondary-text-color: #666;
+  --border-color: #cccccc;
+  --hover-border-color: #666;
+  --highlight-color: #776937;
+  --highlight-color-2: #F2F290;
+  --nav-scroller-color: #cccccc;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  }
+
+  /* General Reset */
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Atkinson Hyperlegible", sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+`
+
+// Create a new router instance
+const router = createRouter({ routeTree })
+
+// Register the router instance for type safety
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}
+
+// Render the app
+const rootElement = document.getElementById('root')!
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement)
+  root.render(
+    <StrictMode>
+      <Global styles={globalCSS} />
+      <RouterProvider router={router} />
+    </StrictMode>,
+  )
+}

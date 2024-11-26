@@ -1,16 +1,4 @@
-/* Define CSS Variables */
-:root {
-  --background-color: #211F1F;
-  --text-color: #EEE9D2;
-  --button-background-color: #313131;
-  --secondary-text-color: #666;
-  --border-color: #cccccc;
-  --hover-border-color: #666;
-  --highlight-color: #776937;
-  --highlight-color-2: #F2F290;
-  --nav-scroller-color: #cccccc;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-}
+
 
 .atkinson-hyperlegible-regular {
   font-family: "Atkinson Hyperlegible", sans-serif;
@@ -37,33 +25,6 @@
 }
 
 
-/* General Reset */
-body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  overflow: hidden;
-  font-family: "Atkinson Hyperlegible", sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
-
-.header {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 16px;
-}
-
-.title {
-  text-align: center;
-  font-size: 24px;
-  font-weight: 400;
-  margin: 0;
-}
 
 .nav {
   transition: all 0.3s ease;
@@ -250,21 +211,4 @@ body {
   background: #313131;
   opacity: 0px;
   rotate: -90deg;
-}
-
-.row-done {
-  position: absolute;
-  top: 50%;
-  left: 82%;
-  font-size: .75rem;
-  width: 100px;
-  font-weight: 600;
-  color: var(--highlight-color);
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-
-.row-done.show {
-  opacity: 1;
-  transform: translate(0%, -50%);
 }
