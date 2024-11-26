@@ -24,7 +24,6 @@ const patternSlice = createSlice({
         state.rowDone = action.payload;
       },
       setCurrentIndex: (state, action: PayloadAction<number>) => {
-        console.log('setCurrentIndex', action.payload);
         state.currentIndex = action.payload;
       },
     },

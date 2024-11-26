@@ -80,7 +80,6 @@ function Pattern() {
   const handleCardClick = (index: number): void => {
     const next = index > typedData.items.length - 1 ? 0 : index;
     if (index === typedData.items.length && next === 0) {
-      console.log('Setting rowDone to true');
       dispatch(setRowDone(true));
     }
     dispatch(setCard(next));

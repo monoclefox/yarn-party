@@ -5,7 +5,7 @@ interface CounterState {
 }
 
 const initialState: CounterState = {
-    activeIndexes: [],
+    activeIndexes: JSON.parse(localStorage.getItem('indexState') || '[]'),
 }
 
 const counterSlice = createSlice({
@@ -13,12 +13,10 @@ const counterSlice = createSlice({
     initialState,
     reducers: {
         setActiveIndexes(state, action: PayloadAction<number[]>) {
-            console.log('setActiveIndexes', action.payload);
             state.activeIndexes = action.payload;
             localStorage.setItem('indexState', JSON.stringify(state.activeIndexes));
         },
         reset(state) {
-            console.log('reset');
             state.activeIndexes = [];
             localStorage.setItem('indexState', JSON.stringify(state.activeIndexes));
         },

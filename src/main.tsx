@@ -14,6 +14,7 @@ import { routeTree } from './routeTree.gen'
 const globalCSS = css`
   :root {
   --background-color: #211F1F;
+  --background-black: #171717;
   --text-color: #EEE9D2;
   --button-background-color: #313131;
   --secondary-text-color: #666;

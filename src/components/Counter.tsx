@@ -81,7 +81,6 @@ function Counter({ data, advanceCallback, doReset, next }: CounterProps) {
       return;
     }
     const indexes = toggle ? [...activeIndexes, id] : activeIndexes.filter((index) => index !== id);
-    console.log('indexes', indexes);
     if (toggle) {
       advanceCallback(id + 1);
     }
