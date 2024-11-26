@@ -67,10 +67,14 @@ function Counter({ data, advanceCallback, doReset, next }: CounterProps) {
 
   useEffect(() => {
     if (doReset) {
-      dispatch(reset());
-      advanceCallback(0);
+      resetCallback();
     }
   }, [doReset, dispatch, advanceCallback]);
+
+  const resetCallback = () => {
+    dispatch(reset());
+    advanceCallback(0);
+  }
 
   const indexCallback = (id: number, toggle: boolean): void => {
     if (activeIndexes.includes(id) && (id !== activeIndexes.length - 1) || id !== next) {
@@ -86,7 +90,7 @@ function Counter({ data, advanceCallback, doReset, next }: CounterProps) {
 
   return <CounterContainer>
     <CounterItems>
-      <ResetButton onClick={() => dispatch(reset())}>
+      <ResetButton onClick={resetCallback}>
         <img src={resetIcon} alt="reset" />
       </ResetButton>
       {data.map((item) => (
