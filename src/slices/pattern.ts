@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
+import { setLocalStorageItem, setLocalStorageItems } from '../util/localStorage';
 interface PatternState {
     card: number;
     rowDone: boolean;
@@ -21,6 +21,7 @@ const patternSlice = createSlice({
     reducers: {
       setCard: (state, action: PayloadAction<number>) => {
         state.card = action.payload;
+        setLocalStorageItem('cardState', JSON.stringify(state.card));
       },
       setRowDone: (state, action: PayloadAction<boolean>) => {
         state.rowDone = action.payload;
@@ -33,6 +34,11 @@ const patternSlice = createSlice({
         state.card = 0;
         state.currentIndex = 0;
         state.rowDone = false;
+        setLocalStorageItems({
+            patternIndex: state.patternIndex,
+            card: state.card,
+            currentIndex: state.currentIndex,
+        });
       },
     },
   });

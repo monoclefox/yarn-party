@@ -33,7 +33,7 @@ const Card = styled.div<{ className?: string }>`
 
 function YarnCard({ item, clickHandler, className }: YarnCardProps) {
     return <Card className={className} onClick={() => clickHandler(item.id + 1)}>
-        {item.text}
+        <div dangerouslySetInnerHTML={{ __html: item.text }} />
     </Card>
 }
 

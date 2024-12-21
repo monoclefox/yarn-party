@@ -140,7 +140,6 @@ function Pattern() {
     }
     dispatch(setCard(next));
     dispatch(setCurrentIndex(next));
-    localStorage.setItem('cardState', JSON.stringify(next));
   }
 
   const handleNavClick = (index: number): void => {
@@ -153,7 +152,6 @@ function Pattern() {
     dispatch(setCard(0));
     dispatch(setCurrentIndex(0));
     dispatch(reset());
-    localStorage.setItem('patternIndex', index.toString());
     setMenuOpen(false);
   };
 
