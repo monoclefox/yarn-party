@@ -1,69 +1,94 @@
 {
-  "title": "<strong>ZigZags</strong> (Fully Reversible)",
-  "items": [
+  "patterns": [
     {
-      "id": 0,
-      "text": "Row 1 (RS): *K1, p2, k3, p2; repeat from * to end."
+      "title": "<strong>ZigZags</strong> (Fully Reversible)",
+      "items": [
+        {
+          "id": 0,
+          "text": "Row 1 (RS): *K1, p2, k3, p2; repeat from * to end."
+        },
+        {
+          "id": 1,
+          "text": "Row 2: P1, k2, *p2, k2; repeat from * to last st, p1."
+        },
+        {
+          "id": 2,
+          "text": "Row 3: [K1, p2] twice, *k3, p2, k1, p2; repeat from * to last 2 sts, k2."
+        },
+        {
+          "id": 3,
+          "text": "Row 4: P3, k4, *p4, k4; repeat from * to last st, p1."
+        },
+        {
+          "id": 4,
+          "text": "Row 5: K1, p3, k2, p1, *k2, p3, k2, p1; repeat from * to last st, k1."
+        },
+        {
+          "id": 5,
+          "text": "Row 6: P1, k2, *p2, k2; repeat from * to last st, p1."
+        },
+        {
+          "id": 6,
+          "text": "Row 7: K1, p1, k2, p3, *k2, p1, k2, p3; repeat from * to last st, k1."
+        },
+        {
+          "id": 7,
+          "text": "Row 8: P1, k4, *p4, k4; repeat from * to last 3 sts, p3."
+        },
+        {
+          "id": 8,
+          "text": "Row 9: K2, p2, k1, p2, *k3, p2, k1, p2; repeat from * to last st, k1."
+        },
+        {
+          "id": 9,
+          "text": "Row 10: P1, k2, *p2, k2; repeat from * to last st, p1."
+        },
+        {
+          "id": 10,
+          "text": "Row 11: *P2, k3, p2, k1; repeat from * to end."
+        },
+        {
+          "id": 11,
+          "text": "Row 12: K3, p4, *k4, p4; repeat from * to last st, k1."
+        },
+        {
+          "id": 12,
+          "text": "Row 13: *K2, p1, k2, p3; repeat from * to end."
+        },
+        {
+          "id": 13,
+          "text": "Row 14: P1, k2, *p2, k2; repeat from * to last st, p1."
+        },
+        {
+          "id": 14,
+          "text": "Row 15: *P3, k2, p1, k2; repeat from * to end."
+        },
+        {
+          "id": 15,
+          "text": "Row 16: *P5, k3; repeat from * to end."
+        }
+      ]
     },
     {
-      "id": 1,
-      "text": "Row 2: P1, k2, *p2, k2; repeat from * to last st, p1."
-    },
-    {
-      "id": 2,
-      "text": "Row 3: [K1, p2] twice, *k3, p2, k1, p2; repeat from * to last 2 sts, k2."
-    },
-    {
-      "id": 3,
-      "text": "Row 4: P3, k4, *p4, k4; repeat from * to last st, p1."
-    },
-    {
-      "id": 4,
-      "text": "Row 5: K1, p3, k2, p1, *k2, p3, k2, p1; repeat from * to last st, k1."
-    },
-    {
-      "id": 5,
-      "text": "Row 6: P1, k2, *p2, k2; repeat from * to last st, p1."
-    },
-    {
-      "id": 6,
-      "text": "Row 7: K1, p1, k2, p3, *k2, p1, k2, p3; repeat from * to last st, k1."
-    },
-    {
-      "id": 7,
-      "text": "Row 8: P1, k4, *p4, k4; repeat from * to last 3 sts, p3."
-    },
-    {
-      "id": 8,
-      "text": "Row 9: K2, p2, k1, p2, *k3, p2, k1, p2; repeat from * to last st, k1."
-    },
-    {
-      "id": 9,
-      "text": "Row 10: P1, k2, *p2, k2; repeat from * to last st, p1."
-    },
-    {
-      "id": 10,
-      "text": "Row 11: *P2, k3, p2, k1; repeat from * to end."
-    },
-    {
-      "id": 11,
-      "text": "Row 12: K3, p4, *k4, p4; repeat from * to last st, k1."
-    },
-    {
-      "id": 12,
-      "text": "Row 13: *K2, p1, k2, p3; repeat from * to end."
-    },
-    {
-      "id": 13,
-      "text": "Row 14: P1, k2, *p2, k2; repeat from * to last st, p1."
-    },
-    {
-      "id": 14,
-      "text": "Row 15: *P3, k2, p1, k2; repeat from * to end."
-    },
-    {
-      "id": 15,
-      "text": "Row 16: *P5, k3; repeat from * to end."
+      "title": "<strong>Little Berries</strong> (Two-Sided)",
+      "items": [
+        {
+          "id": 0,
+          "text": "Row 1 (RS): Yo, s2kp2, yo, *p3, yo, s2kp2, yo; repeat from * to end."
+        },
+        {
+          "id": 1,
+          "text": "Row 2: K3, *p3, k3; repeat from * to end."
+        },
+        {
+          "id": 2,
+          "text": "Row 3: P3, *yo, s2kp2, yo, p3; repeat from * to end."
+        },
+        {
+          "id": 3,
+          "text": "Row 4: K3, *k3, p3; repeat from * to end."
+        }
+      ]
     }
   ]
 }
